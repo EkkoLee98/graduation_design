@@ -11,6 +11,26 @@
         <main-content v-if="!$store.state.common.contentIsNeedRefresh" />
       </div>
     </template>
+
+<!--    <el-table-column-->
+<!--      label="状态"-->
+<!--      align="center"-->
+<!--      header-align="center"-->
+<!--    >-->
+<!--      <template slot-scope="scope">-->
+<!--        <el-tag v-if="scope.row.status === 1" type="success">正常</el-tag>-->
+<!--&lt;!&ndash;        <el-tag v-else-if="scope.row.status === xxx" type="danger">正常</el-tag>&ndash;&gt;-->
+<!--        <el-tag v-else type="danger">？？？</el-tag>-->
+<!--      </template>-->
+<!--    </el-table-column>-->
+<!--    <template v-for="(item, index) in dataList">-->
+<!--      <el-collapse-item :key="index" :title="item.honorTitle" :name="index">-->
+<!--        <div style="position: relative">-->
+<!--          <div>{{item.honorArticle}}</div>-->
+<!--          <div style="position: absolute;right: 0;bottom: 0">{{item.publishTime}}</div>-->
+<!--        </div>-->
+<!--      </el-collapse-item>-->
+<!--    </template>-->
   </div>
 </template>
 

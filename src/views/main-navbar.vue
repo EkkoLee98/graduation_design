@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
     <div class="site-navbar__header">

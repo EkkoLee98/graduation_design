@@ -1,8 +1,8 @@
 <template>
   <el-submenu
     v-if="menu.list && menu.list.length >= 1"
-    :index="menu.menuId + ''"
-    :popper-class="'site-sidebar--' + sidebarLayoutSkin + '-popper'">
+    :index="menu.menuId + ''">
+<!--    :popper-class="'site-sidebar&#45;&#45;' + sidebarLayoutSkin + '-popper'">-->
     <template slot="title">
       <icon-svg :name="menu.icon || ''" class="site-sidebar__menu-icon"></icon-svg>
       <span>{{ menu.name }}</span>
@@ -14,7 +14,7 @@
       :dynamicMenuRoutes="dynamicMenuRoutes">
     </sub-menu>
   </el-submenu>
-  <el-menu-item v-else :index="menu.menuId + ''" @click="gotoRouteHandle(menu)">
+  <el-menu-item class="sb" v-else :index="menu.menuId + ''" @click="gotoRouteHandle(menu)">
     <icon-svg :name="menu.icon || ''" class="site-sidebar__menu-icon"></icon-svg>
     <span>{{ menu.name }}</span>
   </el-menu-item>

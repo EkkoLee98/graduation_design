@@ -53,7 +53,6 @@
     }
   }
 </script>
-=======
 <template>
   <el-submenu
     v-if="menu.list && menu.list.length >= 1"
@@ -109,4 +108,3 @@
     }
   }
 </script>
->>>>>>> Stashed changes

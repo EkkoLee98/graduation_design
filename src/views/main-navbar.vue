@@ -1,19 +1,19 @@
 <template>
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
-    <!--    <div class="site-navbar__header">-->
-    <!--      <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">-->
-    <!--        <a class="site-navbar__brand-lg" href="javascript:;">人人快速开发平台11</a>-->
-    <!--        <a class="site-navbar__brand-mini" href="javascript:;">人人</a>-->
-    <!--      </h1>-->
-    <!--    </div>-->
+        <div class="site-navbar__header">
+          <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">
+            <a class="site-navbar__brand-lg" href="javascript:;">人人快速开发平台11</a>
+            <a class="site-navbar__brand-mini" href="javascript:;">人人</a>
+          </h1>
+        </div>
     <div class="site-navbar__body clearfix">
       <el-menu
         class="site-navbar__menu"
         mode="horizontal">
-<!--        <el-menu-item class="site-navbar__switch" index="0" @click="sidebarFold = !sidebarFold">-->
-        <el-menu-item class="site-navbar__switch" index="0">
-          <img @click="goMain" style="width: 150px;height: 150px;position: fixed; top: -20px;left: 10px" :src="logoUrl">
-        </el-menu-item>
+        <el-menu-item class="site-navbar__switch" index="0" @click="sidebarFold = !sidebarFold"></el-menu-item>
+<!--        <el-menu-item class="site-navbar__switch" index="0">-->
+<!--          <img @click="goMain" style="width: 150px;height: 150px;position: fixed; top: -20px;left: 10px" :src="logoUrl">-->
+<!--        </el-menu-item>-->
       </el-menu>
       <el-menu
         class="site-navbar__menu site-navbar__menu--right"
@@ -36,23 +36,6 @@
         <el-menu-item index="2">
           <a href="https://www.renren.io/" target="_blank">排行榜</a>
         </el-menu-item>
-        <el-submenu index="3">
-          <template slot="title">商品分类</template>
-          <el-menu-item index="3-1"><a href="https://s.taobao.com/search?q=%E9%A3%9F%E5%93%81&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">食品</a>
-          </el-menu-item>
-          <el-menu-item index="3-2"><a href="https://s.taobao.com/search?q=%E7%94%B7%E5%A5%B3%E6%9C%8D%E8%A3%85&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">服饰</a>
-          </el-menu-item>
-          <el-menu-item index="3-3"><a href="https://s.taobao.com/search?q=%E6%89%8B%E6%9C%BA&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">手机</a>
-          </el-menu-item>
-          <el-menu-item index="3-4"><a href="https://s.taobao.com/search?q=%E7%94%B5%E8%84%91&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">电脑</a>
-          </el-menu-item>
-          <el-menu-item index="3-5"><a href="https://s.taobao.com/search?q=%E7%9B%B8%E6%9C%BA&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">相机</a>
-          </el-menu-item>
-          <el-menu-item index="3-6"><a href="https://s.taobao.com/search?ie=utf8&initiative_id=staobaoz_20210124&stats_click=search_radio_all%3A1&js=1&imgfile=&q=%E5%B0%8F%E8%AF%B4+%E7%95%85%E9%94%80%E4%B9%A6&suggest=0_1&_input_charset=utf-8&wq=%E5%B0%8F%E8%AF%B4&suggest_query=%E5%B0%8F%E8%AF%B4&source=suggest" target="_blank">图书</a>
-          </el-menu-item>
-          <el-menu-item index="3-7"><a href="https://s.taobao.com/search?q=%E7%BE%8E%E5%A6%86&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">美妆</a>
-          </el-menu-item>
-        </el-submenu>
         <el-menu-item index="4">
           <a href="https://www.renren.io/" target="_blank">历史记录</a>
         </el-menu-item>
@@ -89,7 +72,7 @@
         <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">
-              <img src="~@/assets/img/avatar.png" :alt="userName">{{ userName }}
+              <img src="~@/assets/img/avatar.png" :alt="userName"><span style="color: #fff">{{ userName }}</span>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>

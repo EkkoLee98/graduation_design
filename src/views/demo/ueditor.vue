@@ -11,7 +11,7 @@
     </el-alert>
 
     <script :id="ueId" class="ueditor-box" type="text/plain" style="width: 100%; height: 260px;">hello world!</script>
-    
+
     <!-- 获取内容 -->
     <p><el-button @click="getContent()">获得内容</el-button></p>
     <el-dialog
@@ -23,6 +23,7 @@
         <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
       </span>
     </el-dialog>
+    <p><el-button @click="postContent()">请求接口</el-button></p>
   </div>
 </template>
 
@@ -48,6 +49,21 @@
         this.dialogVisible = true
         this.ue.ready(() => {
           this.ueContent = this.ue.getContent()
+        })
+      },
+      postContent () {
+        this.$http({
+          url: this.$http.adornUrl('/sys/config/data'),
+          method: 'post',
+          data: this.$http.adornParams({
+            content: this.ue.getContent()
+          })
+        }).then(({data}) => {
+          if (data && data.code === 0) {
+            console.log(data)
+          } else {
+            console.log(data)
+          }
         })
       }
     }

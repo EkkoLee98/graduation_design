@@ -12,8 +12,9 @@ body {
   //background-color: #fff;
 }
 a {
-  color: mix(#fff, $--color-primary, 20%);
+  //color: mix(#fff, $--color-primary, 20%);
   text-decoration: none;
+  color: #606266;
   &:focus,
   &:hover {
     color: $--color-primary;
@@ -51,6 +52,12 @@ img {
 
 /* Reset element-ui
 ------------------------------ */
+.el-button--text {
+  color: #409EFF;
+  &:hover {
+    color: #409EFF;
+  }
+}
 .site-wrapper {
   .el-pagination {
     margin-top: 15px;
@@ -64,6 +71,19 @@ img {
 .site-wrapper {
   position: relative;
   min-width: 1180px;
+}
+
+// 重写样式
+.el-tabs__active-bar {
+  background-color: #409eff;
+}
+ .el-tabs__item.is-active {
+   color: #409eff;
+ }
+.el-tabs__item {
+  &:hover {
+    color: #409eff;
+  }
 }
 
 
@@ -117,15 +137,26 @@ img {
 
 /* Navbar
 ------------------------------ */
+// 重写样式
+.el-menu--horizontal>.el-menu-item:not(.is-disabled):hover {
+  background: transparent;
+}
+.el-menu--horizontal>.el-menu-item {
+  color: #606266;
+}
+.el-menu--horizontal>.el-submenu .el-submenu__title {
+  color: #606266;
+}
 .site-navbar {
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   z-index: 1030;
-  height: 50px;
+  height: 80px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, .08);
-  background-color: $navbar--background-color;
+  //background: linear-gradient(45deg,#feac5e,#c779d0,#4bc0c8);
+  //background-color: $navbar--background-color;
 
   &--inverse {
     .site-navbar__body {
@@ -138,21 +169,30 @@ img {
         &:focus,
         &:hover {
           color: #fff;
-          background-color: mix(#000, $navbar--background-color, 15%);
+          background: transparent;
+          //background-color: mix(#000, $--color-primary, 15%);
         }
       }
       > .el-menu-item.is-active,
       > .el-submenu.is-active > .el-submenu__title {
-        border-bottom-color: mix(#fff, $navbar--background-color, 85%);
+        background: transparent;
+        &:hover {
+          background: transparent;
+        }
+        //border-bottom-color: mix(#fff, $--color-primary, 85%);
       }
       .el-menu-item i,
       .el-submenu__title i,
       .el-dropdown {
         color: #fff;
+        &:hover {
+          background: transparent;
+        }
       }
     }
     .el-menu--popup-bottom-start {
-      background-color: $navbar--background-color;
+      //background-color: $navbar--background-color;
+      background-color: $--color-primary;
     }
   }
 
@@ -213,24 +253,32 @@ img {
     position: relative;
     //margin-left: 230px;
     padding-right: 15px;
-    background-color: #fff;
+    height: 90px;
+    //background-color: #fff;
+    background: linear-gradient(45deg,#feac5e,#c779d0,#4bc0c8);
   }
   &__menu {
     float: left;
+    margin-top: 20px;
     background-color: transparent;
     border-bottom: 0;
 
     &--right {
+      margin-top: 20px;
       float: right;
     }
     a:focus,
     a:hover {
+      background-color: transparent;
       text-decoration: none;
     }
     .el-menu-item,
     .el-submenu > .el-submenu__title {
       height: 50px;
       line-height: 50px;
+      &:hover {
+        background: transparent;
+      }
     }
     .el-submenu > .el-menu {
       top: 55px;
@@ -270,18 +318,25 @@ img {
         color: $sidebar--color-text-dark;
         &:focus,
         &:hover {
+          background: transparent;
           color: mix(#fff, $sidebar--color-text-dark, 50%);
-          background-color: mix(#fff, $sidebar--background-color-dark, 2.5%);
+          //background-color: mix(#fff, $sidebar--background-color-dark, 2.5%);
         }
       }
       .el-menu,
       .el-submenu.is-opened {
         //background-color: mix(#000, #ffffff, 15%);
         background-color: mix(#000, $sidebar--background-color-dark, 15%);
+        &:hover {
+          background: transparent;
+        }
       }
       .el-menu-item.is-active,
       .el-submenu.is-active > .el-submenu__title {
         color: mix(#fff, $sidebar--color-text-dark, 80%);
+        &:hover {
+          background: transparent;
+        }
       }
     }
   }
@@ -331,7 +386,7 @@ img {
       position: fixed;
       top: 50px;
       left: 0;
-      left: 230px;
+      //left: 230px;
       right: 0;
       z-index: 930;
       padding: 0 55px 0 15px;

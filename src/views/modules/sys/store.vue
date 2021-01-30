@@ -5,7 +5,7 @@
         <div style="margin-bottom: 50px;border-bottom: 1px solid #ebeef5">
           <swiper :options="swiperOptionTop" class="gallery-top imgs" ref="swiperTop">
             <swiper-slide class="slide-1 imgsList" v-for="(item,index) in ImgArr" :key="index">
-              <img :src="item.img" alt="">
+              <img :src="item" alt="">
             </swiper-slide>
             <div class="swiper-button-next swiper-button-black" slot="button-next"></div>
             <div class="swiper-button-prev swiper-button-black" slot="button-prev"></div>
@@ -13,7 +13,7 @@
           <!-- swiper2 Thumbs -->
           <swiper :options="swiperOptionThumbs" class="gallery-thumbs" ref="swiperThumbs">
             <swiper-slide class="slide-1" v-for="(item,index) in ImgArr" :key="index">
-              <img :src="item.img" alt="">
+              <img :src="item" alt="">
             </swiper-slide>
           </swiper>
         </div>
@@ -31,7 +31,10 @@
                 超好的包包超好的包包超好的包包 超哥代言必属精品 啊啊啊啊啊我要死了
               </div>
               <div class="color-8a share" style="margin: 20px 0 20px 0">
-                商品名字：
+
+                <el-tooltip  effect="light" :content="goodObj.commName" placement="top">
+                  <div class="goods-name">商品名字：{{goodObj.commName}}</div>
+                </el-tooltip>
                 <div class="vLine"></div>
                 一起来分享给朋友看看吧：
                 <i @click="goQQ" class="icon iconfont icon-qq"></i>
@@ -45,8 +48,8 @@
       <div class="about">
         <el-card class="box-card">
           <div class="head">
-            <img :src="ImgArr[0].img" alt="">
-            <span class="good-name">商品名字</span>
+            <img :src="ImgArr[0]" alt="">
+            <span class="good-name">品牌: {{goodObj.brandName}}</span>
           </div>
           <div class="footer">
             <div class="foot-content left">
@@ -205,16 +208,10 @@ export default {
         }
       ],
       ImgArr: [
-        {'img': 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=64754120,2926909516&fm=26&gp=0.jpg'},
-        {'img': 'https://img-blog.csdnimg.cn/20191018135734573.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI5ODcwMA==,size_16,color_FFFFFF,t_70'},
-        {'img': 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=122592915,2313113112&fm=26&gp=0.jpg'},
-        {'img': 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1757638012,1516051550&fm=26&gp=0.jpg'},
-        {'img': 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=64754120,2926909516&fm=26&gp=0.jpg'},
-        {'img': 'https://img-blog.csdnimg.cn/20191018135734573.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NTI5ODcwMA==,size_16,color_FFFFFF,t_70'},
-        {'img': 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=122592915,2313113112&fm=26&gp=0.jpg'},
-        {'img': 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1757638012,1516051550&fm=26&gp=0.jpg'},
-        {'img': 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1583101657906&di=eee23a5f5fc09873c8c59cf872427435&imgtype=0&src=http%3A%2F%2Fimg.yzcdn.cn%2Fupload_files%2F2018%2F04%2F17%2FFh7neHXL616Eb1lhGDoLWJ87rpxQ.jpg%3FimageView2%2F2%2Fw%2F580%2Fh%2F580%2Fq%2F75%2Fformat%2Fjpg'}
+        'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fzkres2.myzaker.com%2F202004%2F5ea295f4622768f61400027b_1024.jpg&refer=http%3A%2F%2Fzkres2.myzaker.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614627895&t=2054eff631947a222ab8f845cd7bc770'
       ],
+      goodObj: {},
+      reset: true,
       swiperOptionTop: {
         effect: 'fade',
         orderType: 0,
@@ -243,15 +240,41 @@ export default {
       activeName: 'first'
     }
   },
-  mounted() {
+  created () {
     this.$nextTick(() => {
       const swiperTop = this.$refs.swiperTop.swiper
       const swiperThumbs = this.$refs.swiperThumbs.swiper
       swiperTop.controller.control = swiperThumbs
       swiperThumbs.controller.control = swiperTop
     })
+    console.log(this.$route.query)
+    this.getGoodDetail(this.$route.query.id)
+  },
+  computed: {
+  },
+  watch: {
+    $route: {
+      handler (val, old) {
+        console.log(val)
+        this.getGoodDetail(val.query.id)
+      }
+    }
+  },
+  mounted () {
   },
   methods: {
+    getGoodDetail (id) {
+      console.log(id)
+      if (id === undefined) return
+      this.$http({
+        url: this.$http.adornUrl(`/commodity/commodity/info/${id}`),
+        method: 'get'
+      }).then(({data}) => {
+        this.goodObj = data.commodity
+        console.log(this.goodObj)
+        this.ImgArr = this.goodObj.imgUrl
+      })
+    },
     likeIt (item) {
       item.like = !item.like
       if (item.like === true) {
@@ -272,11 +295,32 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event)
     }
+  },
+  destroyed () {
+    console.log('销毁1')
+  },
+  deactivated () {
+    console.log('销毁2')
+    this.goodObj.commName = ''
+    this.goodObj.imgUrl = []
+    this.ImgArr = [
+      'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fzkres2.myzaker.com%2F202004%2F5ea295f4622768f61400027b_1024.jpg&refer=http%3A%2F%2Fzkres2.myzaker.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1614627895&t=2054eff631947a222ab8f845cd7bc770'
+    ]
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.goods-name {
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+  font-size: 14px;
+  color: #8a979e;
+}
 .tool-box {
   display: flex;
   justify-content: space-around;
@@ -318,7 +362,7 @@ export default {
   height: 20px;
   vertical-align: middle;
   display: inline-block;
-  margin: 0 100px 0 100px;
+  margin: 0 30px 0 30px;
 }
 
 .color-8a {

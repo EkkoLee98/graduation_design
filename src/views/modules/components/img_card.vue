@@ -1,24 +1,27 @@
 <template>
-  <el-popover
-    placement="top"
-    :title="item.title"
-    width="200"
-    trigger="hover"
-    :offset="offsetNum"
-    :content="item.content">
-    <div slot="reference" class="box" @click="navigateTo">
-      <img class="img" :src="item.imgSrc">
-      <div class="content">{{item.name}}</div>
-      <div class="footer">
-        <img :src="item.imgSrc" alt="">
-        <span class="good-name">名字名字名字</span>
-        <div class="like" :class="{'liked': item.like === true}" @click="likeIt(item)">
-          <i :class="[item.like ? yes : no]"></i>
-          <span>{{ item.num }}</span>
-        </div>
+<!--  <el-popover-->
+<!--    placement="top"-->
+<!--    :title="item.title"-->
+<!--    width="200"-->
+<!--    trigger="hover"-->
+<!--    :offset="offsetNum"-->
+<!--    :content="item.commName">-->
+
+<!--  </el-popover>-->
+  <div slot="reference" class="box">
+    <img class="img" @click.stop="goCardDetail(item)" :src="item.imgUrl[0]">
+    <div class="content">{{item.brandName}}</div>
+    <div class="footer">
+      <img :src="item.imgUrl[0]" alt="">
+      <el-tooltip  effect="light" :content="item.commName" placement="top">
+        <span class="good-name">{{item.commName}}</span>
+      </el-tooltip>
+      <div class="like" :class="{'liked': item.like === true}" @click.stop="likeIt(item)">
+        <i :class="[item.like ? yes : no]"></i>
+        <span>{{ item.likeCount}}</span>
       </div>
     </div>
-  </el-popover>
+  </div>
 </template>
 
 <script>
@@ -39,13 +42,17 @@ export default {
     }
   },
   methods: {
+    goCardDetail (item) {
+      this.$router.push({path: '/sys-store', query: {id: item.id}})
+    },
     likeIt (item) {
       item.like = !item.like
       if (item.like === true) {
-        item.num++
+        item.likeCount++
       } else {
-        item.num--
+        item.likeCount--
       }
+      return false
     },
     navigateTo () {
       console.log('111')
@@ -93,12 +100,18 @@ export default {
   vertical-align: middle;
 }
 .footer .good-name {
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
   font-size: 14px;
   color: #8a979e;
   margin-left: -50px;
   margin-top: 5px;
 }
 .like {
+  z-index: 9999;
   font-size: 16px;
   margin-top: 20px;
   cursor: pointer;

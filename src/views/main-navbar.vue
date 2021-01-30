@@ -188,8 +188,8 @@ export default {
     $route: 'routeHandle'
   },
   methods: {
-    goMain() {
-      this.$router.push({path: '/sys-store-main'})
+    goMain () {
+      // this.$router.push({path: '/sys-store-main'})
     },
     routeHandle(route) {
       if (route.meta.isTab) {

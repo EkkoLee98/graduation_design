@@ -19,6 +19,7 @@ export default {
       cacheScroll: 0,
       currPage: 1,
       loadData: true,
+      totalCount: 0,
       loading: false,
       dataList: [
         {
@@ -114,9 +115,13 @@ export default {
       if (!this.loadData) return
       if (this.loading) return
       if (this.$route.path !== '/sys-main') return
+      console.log(this.list.length)
+      console.log(this.totalCount)
+      if (this.list.length === this.totalCount) return
       this.scroll = document.documentElement.scrollTop || document.body.scrollTop
-      if (this.scroll > this.cacheScroll + 220) {
+      if (this.scroll > this.cacheScroll + 230) {
         this.currPage++
+        this.loading = true
         this.$http({
           url: this.$http.adornUrl('/commodity/commodity/list'),
           method: 'get',
@@ -125,7 +130,6 @@ export default {
             limit: 10
           })
         }).then(({data}) => {
-          this.loading = true
           if (data.page.length === 0) {
             this.loadData = false
             return
@@ -135,6 +139,7 @@ export default {
             l.like = false
           })
           let newList = this.list.concat(list)
+          this.totalCount = data.page.totalCount
           this.list = newList
           console.log(this.list)
           this.cacheScroll = this.scroll

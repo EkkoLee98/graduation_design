@@ -31,13 +31,13 @@
         <!--          </el-badge>-->
         <!--        </el-menu-item>-->
         <el-menu-item index="1">
-          <a href="https://www.renren.io/" target="_blank">社区精选</a>
+          <a href="https://www.renren.io/" target="_blank">合作相关</a>
         </el-menu-item>
         <el-menu-item index="2">
-          <a href="https://www.renren.io/" target="_blank">排行榜</a>
+          <a href="https://www.renren.io/" target="_blank">用户须知</a>
         </el-menu-item>
         <el-menu-item index="4">
-          <a href="https://www.renren.io/" target="_blank">历史记录</a>
+          <a href="https://www.renren.io/" target="_blank">回收站</a>
         </el-menu-item>
         <el-submenu index="5">
           <template slot="title">导航列表</template>
@@ -51,15 +51,15 @@
           <el-submenu index="demo">
             <template slot="title">
               <icon-svg name="shoucang" class="site-sidebar__menu-icon"></icon-svg>
-              <span>demo</span>
+              <span>推文管理</span>
             </template>
             <el-menu-item index="demo-echarts" @click="$router.push({ name: 'demo-echarts' })">
               <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
-              <span slot="title">echarts</span>
+              <span slot="title">数据统计</span>
             </el-menu-item>
             <el-menu-item index="demo-ueditor" @click="$router.push({ name: 'demo-ueditor' })">
               <icon-svg name="editor" class="site-sidebar__menu-icon"></icon-svg>
-              <span slot="title">ueditor</span>
+              <span slot="title">推文上传</span>
             </el-menu-item>
           </el-submenu>
           <sub-menu
@@ -72,7 +72,7 @@
         <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">
-              <img src="~@/assets/img/avatar.png" :alt="userName"><span style="color: #fff">{{ userName }}</span>
+              <img src="~@/assets/img/1056213.png" :alt="userName"><span style="color: #fff">{{ userName }}</span>
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>

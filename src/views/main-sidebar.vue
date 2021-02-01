@@ -13,7 +13,7 @@
         <el-submenu index="demo">
           <template slot="title">
             <icon-svg name="shoucang" class="site-sidebar__menu-icon"></icon-svg>
-            <span>推文</span>
+            <span>推文概述</span>
           </template>
           <el-menu-item index="demo-echarts" @click="$router.push({ name: 'demo-echarts' })">
             <icon-svg name="tubiao" class="site-sidebar__menu-icon"></icon-svg>
@@ -23,10 +23,10 @@
             <icon-svg name="editor" class="site-sidebar__menu-icon"></icon-svg>
             <span slot="title">推文上传</span>
           </el-menu-item>
-          <el-menu-item index="sys-article" @click="$router.push({ name: 'sys-article' })">
-            <icon-svg name="editor" class="site-sidebar__menu-icon"></icon-svg>
-            <span slot="title">推文管理</span>
-          </el-menu-item>
+<!--          <el-menu-item index="sys-article" @click="$router.push({ name: 'sys-article' })">-->
+<!--            <icon-svg name="editor" class="site-sidebar__menu-icon"></icon-svg>-->
+<!--            <span slot="title">推文管理</span>-->
+<!--          </el-menu-item>-->
         </el-submenu>
         <sub-menu
           v-for="menu in menuList"

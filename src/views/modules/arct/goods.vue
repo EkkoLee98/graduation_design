@@ -26,25 +26,25 @@
         prop="goodId"
         header-align="center"
         align="center"
-        label="">
+        label="id">
       </el-table-column>
       <el-table-column
         prop="goodName"
         header-align="center"
         align="center"
-        label="">
+        label="商品名称">
       </el-table-column>
       <el-table-column
         prop="goodPrice"
         header-align="center"
         align="center"
-        label="">
+        label="商品价格">
       </el-table-column>
       <el-table-column
         prop="goodImg"
         header-align="center"
         align="center"
-        label="">
+        label="商品图片">
       </el-table-column>
       <el-table-column
         fixed="right"

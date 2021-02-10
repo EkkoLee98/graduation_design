@@ -26,7 +26,7 @@
         prop="id"
         header-align="center"
         align="center"
-        label="">
+        label="id">
       </el-table-column>
       <el-table-column
         prop="mainBoard"
@@ -53,10 +53,7 @@
         label="内存权重">
       </el-table-column>
       <el-table-column
-        prop="
-
-
-powerSupply"
+        prop="powerSupply"
         header-align="center"
         align="center"
         label="电源权重">
@@ -66,6 +63,10 @@ powerSupply"
         header-align="center"
         align="center"
         label="是否使用此套权重">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.usingStatus === 1" type="success">正常</el-tag>
+          <el-tag v-if="scope.row.usingStatus === 0" type="danger">停用</el-tag>
+        </template>
       </el-table-column>
       <el-table-column
         fixed="right"

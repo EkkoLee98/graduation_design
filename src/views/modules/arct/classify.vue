@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.classify" placeholder="参数名" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -26,13 +26,13 @@
         prop="classifyId"
         header-align="center"
         align="center"
-        label="">
+        label="id">
       </el-table-column>
       <el-table-column
         prop="classify"
         header-align="center"
         align="center"
-        label="">
+        label="类型">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -66,7 +66,7 @@
     data () {
       return {
         dataForm: {
-          key: ''
+          classify: ''
         },
         dataList: [],
         pageIndex: 1,
@@ -93,7 +93,7 @@
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'key': this.dataForm.key
+            'classify': this.dataForm.classify
           })
         }).then(({data}) => {
           if (data && data.code === 0) {

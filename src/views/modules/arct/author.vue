@@ -26,91 +26,95 @@
         prop="id"
         header-align="center"
         align="center"
-        label="">
+        label="id">
       </el-table-column>
       <el-table-column
         prop="authorName"
         header-align="center"
         align="center"
-        label="">
+        label="作者名称">
       </el-table-column>
       <el-table-column
         prop="avatar"
         header-align="center"
         align="center"
-        label="">
+        label="头像地址">
       </el-table-column>
       <el-table-column
         prop="status"
         header-align="center"
         align="center"
-        label="">
+        label="状态">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.status === 1" type="success">正常</el-tag>
+          <el-tag v-if="scope.row.status === 0" type="danger">停用</el-tag>
+        </template>
       </el-table-column>
       <el-table-column
         prop="articleIds"
         header-align="center"
         align="center"
-        label="">
+        label="作品id">
       </el-table-column>
       <el-table-column
         prop="articleLikesIds"
         header-align="center"
         align="center"
-        label="">
+        label="喜欢的作品">
       </el-table-column>
       <el-table-column
         prop="authorLikesIds"
         header-align="center"
         align="center"
-        label="">
+        label="喜欢的作者">
       </el-table-column>
       <el-table-column
-        prop="explain"
+        prop="motto"
         header-align="center"
         align="center"
-        label="">
+        label="简介">
       </el-table-column>
       <el-table-column
         prop="fansCount"
         header-align="center"
         align="center"
-        label="">
+        label="粉丝数量">
       </el-table-column>
       <el-table-column
         prop="followCount"
         header-align="center"
         align="center"
-        label="">
+        label="关注数量">
       </el-table-column>
       <el-table-column
         prop="gender"
         header-align="center"
         align="center"
-        label="">
+        label="性别">
       </el-table-column>
       <el-table-column
         prop="integralCount"
         header-align="center"
         align="center"
-        label="">
+        label="积分">
       </el-table-column>
       <el-table-column
         prop="professional"
         header-align="center"
         align="center"
-        label="">
+        label="职位">
       </el-table-column>
       <el-table-column
         prop="thumpsUpArticleIds"
         header-align="center"
         align="center"
-        label="">
+        label="点赞文章">
       </el-table-column>
       <el-table-column
         prop="labelIds"
         header-align="center"
         align="center"
-        label="">
+        label="标签">
       </el-table-column>
       <el-table-column
         fixed="right"

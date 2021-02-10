@@ -28,14 +28,8 @@
     <el-form-item label="" prop="createTime">
       <el-input v-model="dataForm.createTime" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="comments">
-      <el-input v-model="dataForm.comments" placeholder=""></el-input>
-    </el-form-item>
     <el-form-item label="" prop="collectionCount">
       <el-input v-model="dataForm.collectionCount" placeholder=""></el-input>
-    </el-form-item>
-    <el-form-item label="" prop="commentsCount">
-      <el-input v-model="dataForm.commentsCount" placeholder=""></el-input>
     </el-form-item>
     <el-form-item label="" prop="cover">
       <el-input v-model="dataForm.cover" placeholder=""></el-input>
@@ -63,9 +57,7 @@
           title: '',
           mode: '',
           createTime: '',
-          comments: '',
           collectionCount: '',
-          commentsCount: '',
           cover: ''
         },
         dataRule: {
@@ -93,13 +85,7 @@
           createTime: [
             { required: true, message: '不能为空', trigger: 'blur' }
           ],
-          comments: [
-            { required: true, message: '不能为空', trigger: 'blur' }
-          ],
           collectionCount: [
-            { required: true, message: '不能为空', trigger: 'blur' }
-          ],
-          commentsCount: [
             { required: true, message: '不能为空', trigger: 'blur' }
           ],
           cover: [
@@ -129,9 +115,7 @@
                 this.dataForm.title = data.article.title
                 this.dataForm.mode = data.article.mode
                 this.dataForm.createTime = data.article.createTime
-                this.dataForm.comments = data.article.comments
                 this.dataForm.collectionCount = data.article.collectionCount
-                this.dataForm.commentsCount = data.article.commentsCount
                 this.dataForm.cover = data.article.cover
               }
             })
@@ -155,9 +139,7 @@
                 'title': this.dataForm.title,
                 'mode': this.dataForm.mode,
                 'createTime': this.dataForm.createTime,
-                'comments': this.dataForm.comments,
                 'collectionCount': this.dataForm.collectionCount,
-                'commentsCount': this.dataForm.commentsCount,
                 'cover': this.dataForm.cover
               })
             }).then(({data}) => {

@@ -2,7 +2,7 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.classify" placeholder="参数名" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
@@ -26,7 +26,7 @@
         prop="id"
         header-align="center"
         align="center"
-        label="">
+        label="id">
       </el-table-column>
       <el-table-column
         prop="authorId"
@@ -38,69 +38,58 @@
         prop="browseCount"
         header-align="center"
         align="center"
-        label="">
+        label="浏览量">
       </el-table-column>
       <el-table-column
         prop="classify"
         header-align="center"
         align="center"
-        label="">
+        label="类型">
       </el-table-column>
       <el-table-column
         prop="content"
+        show-overflow-tooltip
         header-align="center"
         align="center"
-        label="">
+        label="文章内容">
       </el-table-column>
       <el-table-column
-        prop="
-thumbsUpCount"
+        prop="thumbsUpCount"
         header-align="center"
         align="center"
-        label="">
+        label="点赞数量">
       </el-table-column>
       <el-table-column
-        prop="
-title"
+        prop="title"
+        show-overflow-tooltip
         header-align="center"
         align="center"
-        label="">
+        label="标题">
       </el-table-column>
       <el-table-column
         prop="mode"
         header-align="center"
         align="center"
-        label="">
+        label="布局">
       </el-table-column>
       <el-table-column
         prop="createTime"
         header-align="center"
         align="center"
-        label="">
-      </el-table-column>
-      <el-table-column
-        prop="comments"
-        header-align="center"
-        align="center"
-        label="">
+        label="发表时间">
       </el-table-column>
       <el-table-column
         prop="collectionCount"
         header-align="center"
         align="center"
-        label="">
-      </el-table-column>
-      <el-table-column
-        prop="commentsCount"
-        header-align="center"
-        align="center"
-        label="">
+        label="收藏数量">
       </el-table-column>
       <el-table-column
         prop="cover"
+        show-overflow-tooltip
         header-align="center"
         align="center"
-        label="">
+        label="封面图">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -134,7 +123,7 @@ title"
     data () {
       return {
         dataForm: {
-          key: ''
+          classify: ''
         },
         dataList: [],
         pageIndex: 1,
@@ -161,7 +150,7 @@ title"
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'key': this.dataForm.key
+            'classify': this.dataForm.classify
           })
         }).then(({data}) => {
           if (data && data.code === 0) {

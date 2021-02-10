@@ -12,8 +12,11 @@ import { isAuth } from '@/utils'
 import cloneDeep from 'lodash/cloneDeep'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import 'swiper/dist/css/swiper.css'
-Vue.use(VueAwesomeSwiper)
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.snow.css'
 
+Vue.use(VueAwesomeSwiper)
+Vue.use(VueQuillEditor)
 Vue.use(VueCookie)
 Vue.config.productionTip = false
 

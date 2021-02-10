@@ -89,6 +89,9 @@ img {
 .el-tag {
   color: #409eff;
 }
+.el-tag--danger {
+  color: red;
+}
 .el-tag--success {
   color: #67c23a;
 }
@@ -468,10 +471,10 @@ img {
   &__inner {
     position: relative;
     z-index: 1;
+    overflow-y: auto;
     width: 250px;
     height: 100%;
     padding-bottom: 15px;
-    overflow-y: scroll;
   }
   &__menu.el-menu {
     width: 230px;

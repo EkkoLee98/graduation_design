@@ -32,8 +32,8 @@
               </div>
               <div class="color-8a share" style="margin: 20px 0 20px 0">
 
-                <el-tooltip  effect="light" :content="goodObj.commName" placement="top">
-                  <div class="goods-name">商品名字：{{goodObj.commName}}</div>
+                <el-tooltip  effect="light" :content="goodObj.commodityInfo" placement="top">
+                  <div class="goods-name">商品名字：{{goodObj.commodityName}}</div>
                 </el-tooltip>
                 <div class="vLine"></div>
                 一起来分享给朋友看看吧：
@@ -49,7 +49,8 @@
         <el-card class="box-card">
           <div class="head">
             <img :src="ImgArr[0]" alt="">
-            <span class="good-name">品牌: {{goodObj.brandName}}</span>
+            <span class="good-name">品牌: {{goodObj.brand}}</span>
+            <el-button @click="collectGood" :disabled="goodObj.collect" style="margin-left: 40px" type="text">{{goodObj.collect ? '已收藏' : '收藏'}}</el-button>
           </div>
           <div class="footer">
             <div class="foot-content left">
@@ -62,7 +63,7 @@
             </div>
             <div class="foot-content right">
               <div class="color-8a">获赞与收藏</div>
-              <div>34.5万</div>
+              <div>{{goodObj.collectCount + goodObj.likeCount}}</div>
             </div>
           </div>
         </el-card>
@@ -103,7 +104,7 @@
       <el-tabs v-model="activeName" @tab-click="handleClick">
         <el-tab-pane label="商品详细" name="first">
           <div class="title">
-            品牌名称: <span style="color: black">无敌小花花</span>
+            品牌名称: <span style="color: black">{{goodObj.brand}}</span>
           </div>
           <div class="title">
             品牌参数:
@@ -157,9 +158,37 @@
             </div>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="累计评价" name="second">暂无开放</el-tab-pane>
+        <el-tab-pane label="累计评价" name="second">
+          <div class="menu-wrap">
+            <div class="comment" v-for="(item, index) in commentList">
+              <div style="margin-right: 20px">
+                <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1374152916,1336053607&fm=26&gp=0.jpg">
+              </div>
+              <div style="text-align: left">
+                <div style="margin-bottom: 10px;font-size: 12px;color: #898989">{{item.userName}}</div>
+                <div style="margin-bottom: 10px">{{item.evaluation}}</div>
+                <div style="margin-bottom: 10px;font-size: 12px;color: #898989">{{item.createTime}}</div>
+              </div>
+            </div>
+            <el-button style="margin-top: 10px; float: left" type="primary" @click="dialogFormVisible = true">发表评论</el-button>
+          </div>
+        </el-tab-pane>
       </el-tabs>
     </div>
+    <el-dialog title="发表评论" :visible.sync="dialogFormVisible">
+      <el-form :model="form">
+        <el-form-item label="评论" :label-width="formLabelWidth">
+          <el-input v-model="form.evaluation" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="星星" :label-width="formLabelWidth">
+          <el-rate :max="5" style="margin-top: 6px" v-model="form.star"></el-rate>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="submitComment()">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -168,6 +197,17 @@ export default {
   name: 'store',
   data () {
     return {
+      commentList: [{
+        'userName': 'test',
+        'evaluation': '超哥帅',
+        'createTime': '2077-01-01'
+      }],
+      dialogFormVisible: false,
+      form: {
+        evaluation: '',
+        star: null
+      },
+      formLabelWidth: '120px',
       tags: [
         {name: '时尚', type: 'info', active: true},
         {name: '箱包', type: 'info', active: true},
@@ -263,6 +303,37 @@ export default {
   mounted () {
   },
   methods: {
+    submitComment () {
+      this.$http({
+        url: this.$http.adornUrl('/commodity/commodity/comment'),
+        method: 'post',
+        data: this.$http.adornData({
+          id: this.goodObj.id,
+          content: this.form.evaluation,
+          star: this.form.star
+        }, false)
+      }).then(res => {
+        console.log(res)
+        if (res.data.code === 0) {
+          console.log('111')
+          this.dialogFormVisible = false
+        }
+      })
+    },
+    collectGood () {
+      this.$http({
+        url: this.$http.adornUrl('/commodity/commodity/collection'),
+        method: 'post',
+        data: this.$http.adornData({
+          id: this.goodObj.id
+        })
+      }).then(res => {
+        console.log(res)
+        if (res.data.code === 0) {
+          this.goodObj.collect = true
+        }
+      })
+    },
     getGoodDetail (id) {
       console.log(id)
       if (id === undefined) return
@@ -272,7 +343,7 @@ export default {
       }).then(({data}) => {
         this.goodObj = data.commodity
         console.log(this.goodObj)
-        this.ImgArr = this.goodObj.imgUrl
+        // this.ImgArr = this.goodObj.imgUrl
       })
     },
     likeIt (item) {
@@ -311,6 +382,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.menu-wrap {
+  .comment {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 110px;
+    border-bottom: 1px solid #898989;
+    img {
+      border-radius: 100%;
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
 .goods-name {
   width: 200px;
   overflow: hidden;

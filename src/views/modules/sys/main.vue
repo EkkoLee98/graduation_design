@@ -18,6 +18,7 @@ export default {
       scroll: 0,
       cacheScroll: 0,
       currPage: 1,
+      currType: '',
       loadData: true,
       totalCount: 0,
       loading: false,
@@ -107,8 +108,22 @@ export default {
   },
   mounted () {
     console.log(this.$route.path)
-    this.getList()
+    // this.getList()
     window.addEventListener('scroll', this.menu)
+    console.log(this.$route.query)
+    this.currType = this.$route.query.type
+    this.getList()
+  },
+  watch: {
+    $route: {
+      handler (val) {
+        console.log(val.query)
+        this.currType = val.query.type
+        this.currPage = 1
+        this.list = []
+        this.getList()
+      }
+    }
   },
   methods: {
     menu () {
@@ -127,7 +142,8 @@ export default {
           method: 'get',
           params: this.$http.adornParams({
             page: this.currPage,
-            limit: 10
+            limit: 10,
+            commodityType: this.currType
           })
         }).then(({data}) => {
           if (data.page.length === 0) {
@@ -135,9 +151,9 @@ export default {
             return
           }
           let list = data.page.list
-          list.forEach(l => {
-            l.like = false
-          })
+          // list.forEach(l => {
+          //   l.like = false
+          // })
           let newList = this.list.concat(list)
           this.totalCount = data.page.totalCount
           this.list = newList
@@ -151,13 +167,15 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/commodity/commodity/list'),
         method: 'get',
-        params: this.$http.adornParams()
+        params: this.$http.adornParams({
+          'commodityType': this.currType
+        })
       }).then(({data}) => {
         console.log(data)
         this.list = data.page.list
-        this.list.forEach(l => {
-          l.like = false
-        })
+        // this.list.forEach(l => {
+        //   l.like = false
+        // })
       })
     }
   }

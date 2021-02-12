@@ -10,11 +10,11 @@
 <!--  </el-popover>-->
   <div slot="reference" class="box">
     <img class="img" @click.stop="goCardDetail(item)" :src="item.imgUrl[0]">
-    <div class="content">{{item.brandName}}</div>
+    <div class="content">{{item.brand}}</div>
     <div class="footer">
       <img :src="item.imgUrl[0]" alt="">
-      <el-tooltip  effect="light" :content="item.commName" placement="top">
-        <span class="good-name">{{item.commName}}</span>
+      <el-tooltip  effect="light" :content="item.commodityInfo" placement="top">
+        <span class="good-name">{{item.commodityName}}</span>
       </el-tooltip>
       <div class="like" :class="{'liked': item.like === true}" @click.stop="likeIt(item)">
         <i :class="[item.like ? yes : no]"></i>
@@ -46,13 +46,24 @@ export default {
       this.$router.push({path: '/sys-store', query: {id: item.id}})
     },
     likeIt (item) {
-      item.like = !item.like
-      if (item.like === true) {
-        item.likeCount++
-      } else {
-        item.likeCount--
-      }
-      return false
+      this.$http({
+        url: this.$http.adornUrl('/commodity/commodity/like'),
+        method: 'post',
+        data: this.$http.adornData({
+          id: item.id
+        })
+      }).then(res => {
+        console.log(res)
+        if (res.data.code === 0) {
+          item.like = !item.like
+          if (item.like === true) {
+            item.likeCount++
+          } else {
+            item.likeCount--
+          }
+        }
+      })
+      // return false
     },
     navigateTo () {
       console.log('111')

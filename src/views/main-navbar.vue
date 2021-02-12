@@ -38,19 +38,19 @@
         </el-menu-item>
         <el-submenu index="3">
           <template slot="title">商品分类</template>
-          <el-menu-item index="3-1"><a href="https://s.taobao.com/search?q=%E9%A3%9F%E5%93%81&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">食品</a>
+          <el-menu-item index="3-1"><a @click="$router.push({path: 'sys-main', query: {type: '食品'}})">食品</a>
           </el-menu-item>
-          <el-menu-item index="3-2"><a href="https://s.taobao.com/search?q=%E7%94%B7%E5%A5%B3%E6%9C%8D%E8%A3%85&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">服饰</a>
+          <el-menu-item index="3-2"><a @click="$router.push({path: 'sys-main', query: {type: '服饰'}})">服饰</a>
           </el-menu-item>
-          <el-menu-item index="3-3"><a href="https://s.taobao.com/search?q=%E6%89%8B%E6%9C%BA&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">手机</a>
+          <el-menu-item index="3-3"><a @click="$router.push({path: 'sys-main', query: {type: '手机'}})">手机</a>
           </el-menu-item>
-          <el-menu-item index="3-4"><a href="https://s.taobao.com/search?q=%E7%94%B5%E8%84%91&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">电脑</a>
+          <el-menu-item index="3-4"><a @click="$router.push({path: 'sys-main', query: {type: '电脑'}})">电脑</a>
           </el-menu-item>
-          <el-menu-item index="3-5"><a href="https://s.taobao.com/search?q=%E7%9B%B8%E6%9C%BA&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">相机</a>
+          <el-menu-item index="3-5"><a @click="$router.push({path: 'sys-main', query: {type: '相机'}})">相机</a>
           </el-menu-item>
-          <el-menu-item index="3-6"><a href="https://s.taobao.com/search?ie=utf8&initiative_id=staobaoz_20210124&stats_click=search_radio_all%3A1&js=1&imgfile=&q=%E5%B0%8F%E8%AF%B4+%E7%95%85%E9%94%80%E4%B9%A6&suggest=0_1&_input_charset=utf-8&wq=%E5%B0%8F%E8%AF%B4&suggest_query=%E5%B0%8F%E8%AF%B4&source=suggest" target="_blank">图书</a>
+          <el-menu-item index="3-6"><a @click="$router.push({path: 'sys-main', query: {type: '图书'}})">图书</a>
           </el-menu-item>
-          <el-menu-item index="3-7"><a href="https://s.taobao.com/search?q=%E7%BE%8E%E5%A6%86&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20210124&ie=utf8" target="_blank">美妆</a>
+          <el-menu-item index="3-7"><a @click="$router.push({path: 'sys-main', query: {type: '美妆'}})">美妆</a>
           </el-menu-item>
         </el-submenu>
         <el-menu-item index="4">

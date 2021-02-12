@@ -117,6 +117,12 @@
         label="标签">
       </el-table-column>
       <el-table-column
+        prop="address"
+        header-align="center"
+        align="center"
+        label="地址">
+      </el-table-column>
+      <el-table-column
         fixed="right"
         header-align="center"
         align="center"

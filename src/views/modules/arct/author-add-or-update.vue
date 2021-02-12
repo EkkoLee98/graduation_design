@@ -4,48 +4,48 @@
     :close-on-click-modal="false"
     :visible.sync="visible">
     <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" label-width="80px">
-    <el-form-item label="" prop="authorName">
+    <el-form-item label="名字" prop="authorName">
       <el-input v-model="dataForm.authorName" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="avatar">
-      <el-input v-model="dataForm.avatar" placeholder=""></el-input>
-    </el-form-item>
-    <el-form-item label="" prop="status">
+    <el-form-item label="状态" prop="status">
       <el-input v-model="dataForm.status" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="articleIds">
+    <el-form-item label="作品" prop="articleIds">
       <el-input v-model="dataForm.articleIds" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="articleLikesIds">
+    <el-form-item label="喜欢的作品" prop="articleLikesIds">
       <el-input v-model="dataForm.articleLikesIds" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="authorLikesIds">
+    <el-form-item label="喜欢的作者" prop="authorLikesIds">
       <el-input v-model="dataForm.authorLikesIds" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="explain">
-      <el-input v-model="dataForm.explain" placeholder=""></el-input>
+    <el-form-item label="自我介绍" prop="motto">
+      <el-input v-model="dataForm.motto" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="fansCount">
+    <el-form-item label="粉丝数" prop="fansCount">
       <el-input v-model="dataForm.fansCount" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="followCount">
+    <el-form-item label="关注数" prop="followCount">
       <el-input v-model="dataForm.followCount" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="gender">
+    <el-form-item label="性别" prop="gender">
       <el-input v-model="dataForm.gender" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="integralCount">
+    <el-form-item label="积分" prop="integralCount">
       <el-input v-model="dataForm.integralCount" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="professional">
+    <el-form-item label="职业" prop="professional">
       <el-input v-model="dataForm.professional" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="thumpsUpArticleIds">
+    <el-form-item label="点赞文章" prop="thumpsUpArticleIds">
       <el-input v-model="dataForm.thumpsUpArticleIds" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="labelIds">
+    <el-form-item label="标签" prop="labelIds">
       <el-input v-model="dataForm.labelIds" placeholder=""></el-input>
     </el-form-item>
+      <el-form-item label="地址" prop="address">
+        <el-input v-model="dataForm.address" placeholder=""></el-input>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -67,14 +67,15 @@
           articleIds: '',
           articleLikesIds: '',
           authorLikesIds: '',
-          explain: '',
+          motto: '',
           fansCount: '',
           followCount: '',
           gender: '',
           integralCount: '',
           professional: '',
           thumpsUpArticleIds: '',
-          labelIds: ''
+          labelIds: '',
+          address: ''
         },
         dataRule: {
           authorName: [
@@ -95,7 +96,7 @@
           authorLikesIds: [
             { required: true, message: '不能为空', trigger: 'blur' }
           ],
-          explain: [
+          motto: [
             { required: true, message: '不能为空', trigger: 'blur' }
           ],
           fansCount: [
@@ -141,7 +142,7 @@
                 this.dataForm.articleIds = data.author.articleIds
                 this.dataForm.articleLikesIds = data.author.articleLikesIds
                 this.dataForm.authorLikesIds = data.author.authorLikesIds
-                this.dataForm.explain = data.author.explain
+                this.dataForm.motto = data.author.motto
                 this.dataForm.fansCount = data.author.fansCount
                 this.dataForm.followCount = data.author.followCount
                 this.dataForm.gender = data.author.gender
@@ -149,6 +150,7 @@
                 this.dataForm.professional = data.author.professional
                 this.dataForm.thumpsUpArticleIds = data.author.thumpsUpArticleIds
                 this.dataForm.labelIds = data.author.labelIds
+                this.dataForm.address = data.author.address
               }
             })
           }
@@ -169,14 +171,15 @@
                 'articleIds': this.dataForm.articleIds,
                 'articleLikesIds': this.dataForm.articleLikesIds,
                 'authorLikesIds': this.dataForm.authorLikesIds,
-                'explain': this.dataForm.explain,
+                'motto': this.dataForm.motto,
                 'fansCount': this.dataForm.fansCount,
                 'followCount': this.dataForm.followCount,
                 'gender': this.dataForm.gender,
                 'integralCount': this.dataForm.integralCount,
                 'professional': this.dataForm.professional,
                 'thumpsUpArticleIds': this.dataForm.thumpsUpArticleIds,
-                'labelIds': this.dataForm.labelIds
+                'labelIds': this.dataForm.labelIds,
+                'address': this.dataForm.address
               })
             }).then(({data}) => {
               if (data && data.code === 0) {

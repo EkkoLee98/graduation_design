@@ -7,9 +7,6 @@
     <el-form-item label="评论" prop="commentContent">
       <el-input v-model="dataForm.commentContent" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="是否子回复" prop="isReply">
-      <el-input v-model="dataForm.isReply" placeholder=""></el-input>
-    </el-form-item>
     <el-form-item label="发表人" prop="authorId">
       <el-input v-model="dataForm.authorId" placeholder=""></el-input>
     </el-form-item>

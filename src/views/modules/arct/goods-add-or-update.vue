@@ -13,6 +13,9 @@
     <el-form-item label="" prop="goodImg">
       <el-input v-model="dataForm.goodImg" placeholder=""></el-input>
     </el-form-item>
+      <el-form-item label="" prop="goodIntegral">
+        <el-input v-model="dataForm.goodIntegral" placeholder=""></el-input>
+      </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
       <el-button @click="visible = false">取消</el-button>
@@ -30,7 +33,8 @@
           goodId: 0,
           goodName: '',
           goodPrice: '',
-          goodImg: ''
+          goodImg: '',
+          goodIntegral: ''
         },
         dataRule: {
           goodName: [
@@ -61,6 +65,7 @@
                 this.dataForm.goodName = data.goods.goodName
                 this.dataForm.goodPrice = data.goods.goodPrice
                 this.dataForm.goodImg = data.goods.goodImg
+                this.dataForm.goodIntegral = data.goods.goodIntegral
               }
             })
           }
@@ -77,7 +82,8 @@
                 'goodId': this.dataForm.goodId || undefined,
                 'goodName': this.dataForm.goodName,
                 'goodPrice': this.dataForm.goodPrice,
-                'goodImg': this.dataForm.goodImg
+                'goodImg': this.dataForm.goodImg,
+                'goodIntegral': this.dataForm.goodIntegral
               })
             }).then(({data}) => {
               if (data && data.code === 0) {

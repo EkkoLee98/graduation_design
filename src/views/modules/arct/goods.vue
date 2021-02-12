@@ -47,6 +47,12 @@
         label="商品图片">
       </el-table-column>
       <el-table-column
+        prop="goodIntegral"
+        header-align="center"
+        align="center"
+        label="商品积分">
+      </el-table-column>
+      <el-table-column
         fixed="right"
         header-align="center"
         align="center"

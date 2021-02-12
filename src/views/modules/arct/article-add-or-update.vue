@@ -7,31 +7,31 @@
     <el-form-item label="作者关联ID" prop="authorId">
       <el-input v-model="dataForm.authorId" placeholder="作者关联ID"></el-input>
     </el-form-item>
-    <el-form-item label="" prop="browseCount">
+    <el-form-item label="浏览数量" prop="browseCount">
       <el-input v-model="dataForm.browseCount" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="classify">
+    <el-form-item label="类别" prop="classify">
       <el-input v-model="dataForm.classify" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="content">
+    <el-form-item label="内容" prop="content">
       <el-input v-model="dataForm.content" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="thumbsUpCount">
+    <el-form-item label="点赞数" prop="thumbsUpCount">
       <el-input v-model="dataForm.thumbsUpCount" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="title">
+    <el-form-item label="标题" prop="title">
       <el-input v-model="dataForm.title" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="mode">
+    <el-form-item label="展示" prop="mode">
       <el-input v-model="dataForm.mode" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="createTime">
+    <el-form-item label="创建时间" prop="createTime">
       <el-input v-model="dataForm.createTime" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="collectionCount">
+    <el-form-item label="点赞数" prop="collectionCount">
       <el-input v-model="dataForm.collectionCount" placeholder=""></el-input>
     </el-form-item>
-    <el-form-item label="" prop="cover">
+    <el-form-item label="封面图" prop="cover">
       <el-input v-model="dataForm.cover" placeholder=""></el-input>
     </el-form-item>
     </el-form>

@@ -2,12 +2,12 @@
   <div class="mod-config">
     <el-form :inline="true" :model="dataForm" @keyup.enter.native="getDataList()">
       <el-form-item>
-        <el-input v-model="dataForm.classify" placeholder="参数名" clearable></el-input>
+        <el-input v-model="dataForm.key" placeholder="参数名" clearable></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('arct:article:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
-        <el-button v-if="isAuth('arct:article:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
+        <el-button v-if="isAuth('arct:comments:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button v-if="isAuth('arct:comments:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
     <el-table
@@ -29,67 +29,38 @@
         label="id">
       </el-table-column>
       <el-table-column
-        prop="authorId"
+        prop="commentContent"
         header-align="center"
         align="center"
-        label="作者关联ID">
-      </el-table-column>
-      <el-table-column
-        prop="browseCount"
-        header-align="center"
-        align="center"
-        label="浏览量">
-      </el-table-column>
-      <el-table-column
-        prop="classify"
-        header-align="center"
-        align="center"
-        label="类型">
-      </el-table-column>
-      <el-table-column
-        prop="content"
-        show-overflow-tooltip
-        header-align="center"
-        align="center"
-        label="文章内容">
-      </el-table-column>
-      <el-table-column
-        prop="thumbsUpCount"
-        header-align="center"
-        align="center"
-        label="点赞数量">
-      </el-table-column>
-      <el-table-column
-        prop="title"
-        show-overflow-tooltip
-        header-align="center"
-        align="center"
-        label="标题">
-      </el-table-column>
-      <el-table-column
-        prop="mode"
-        header-align="center"
-        align="center"
-        label="布局">
+        label="评论">
       </el-table-column>
       <el-table-column
         prop="createTime"
         header-align="center"
         align="center"
-        label="发表时间">
+        label="日期">
       </el-table-column>
       <el-table-column
-        prop="collectionCount"
+        prop="isReply"
         header-align="center"
         align="center"
-        label="收藏数量">
+        label="是否子回复">
+        <template slot-scope="scope">
+          <el-tag v-if="scope.row.isReply === '1'" type="success">是</el-tag>
+          <el-tag v-if="scope.row.isReply === '0'" type="danger">否</el-tag>
+        </template>
       </el-table-column>
       <el-table-column
-        prop="cover"
-        show-overflow-tooltip
+        prop="authorId"
         header-align="center"
         align="center"
-        label="封面图">
+        label="发表人">
+      </el-table-column>
+      <el-table-column
+        prop="articleId"
+        header-align="center"
+        align="center"
+        label="文章id">
       </el-table-column>
       <el-table-column
         fixed="right"
@@ -118,12 +89,12 @@
 </template>
 
 <script>
-  import AddOrUpdate from './article-add-or-update'
+  import AddOrUpdate from './comments-add-or-update'
   export default {
     data () {
       return {
         dataForm: {
-          classify: ''
+          key: ''
         },
         dataList: [],
         pageIndex: 1,
@@ -145,12 +116,12 @@
       getDataList () {
         this.dataListLoading = true
         this.$http({
-          url: this.$http.adornUrl('/arct/article/list'),
+          url: this.$http.adornUrl('/arct/comments/list'),
           method: 'get',
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
-            'classify': this.dataForm.classify
+            'key': this.dataForm.key
           })
         }).then(({data}) => {
           if (data && data.code === 0) {
@@ -180,16 +151,10 @@
       },
       // 新增 / 修改
       addOrUpdateHandle (id) {
-        if (id === undefined) {
-          console.log('111')
-          this.$router.push({path: '/upload-article/add'})
-        } else {
-          this.$router.push({path: `/upload-article/${id}`})
-        }
-        // this.addOrUpdateVisible = true
-        // this.$nextTick(() => {
-        //   this.$refs.addOrUpdate.init(id)
-        // })
+        this.addOrUpdateVisible = true
+        this.$nextTick(() => {
+          this.$refs.addOrUpdate.init(id)
+        })
       },
       // 删除
       deleteHandle (id) {
@@ -202,7 +167,7 @@
           type: 'warning'
         }).then(() => {
           this.$http({
-            url: this.$http.adornUrl('/arct/article/delete'),
+            url: this.$http.adornUrl('/arct/comments/delete'),
             method: 'post',
             data: this.$http.adornData(ids, false)
           }).then(({data}) => {

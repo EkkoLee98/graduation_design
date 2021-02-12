@@ -74,6 +74,11 @@ img {
 }
 
 // 重写样式 公共
+.el-card__body {
+  overflow-y: auto;
+  height: 630px !important;
+}
+
 .el-tabs__active-bar {
   background-color: #409eff;
 }

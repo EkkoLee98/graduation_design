@@ -81,6 +81,8 @@
             }).then(({data}) => {
               if (data && data.code === 0) {
                 this.$cookie.set('token', data.token)
+                this.$cookie.set('author', JSON.stringify(data.author))
+                this.$cookie.set('role', JSON.stringify(data.role))
                 this.$router.replace({ name: 'demo-echarts' })
               } else {
                 this.getCaptcha()

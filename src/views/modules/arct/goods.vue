@@ -60,6 +60,7 @@
         label="操作">
         <template slot-scope="scope">
           <el-button type="text" size="small" @click="addOrUpdateHandle(scope.row.goodId)">修改</el-button>
+          <el-button type="text" size="small" @click="handleBuy(scope.row)">兑换</el-button>
           <el-button type="text" size="small" @click="deleteHandle(scope.row.goodId)">删除</el-button>
         </template>
       </el-table-column>
@@ -145,6 +146,42 @@
         this.$nextTick(() => {
           this.$refs.addOrUpdate.init(id)
         })
+      },
+      handleBuy (row) {
+        let goodName = row.goodName
+        let goodIntegral = row.goodIntegral
+        let integralCount = JSON.parse(this.$cookie.get('author')).integralCount
+        if (goodIntegral > integralCount) {
+          this.$message.error('积分不足！')
+          return false
+        } else {
+          this.$http({
+            url: this.$http.adornUrl('/arct/integralorder/save'),
+            method: 'post',
+            data: this.$http.adornData({
+              'goodName': goodName,
+              'authorId': JSON.parse(this.$cookie.get('author')).id,
+              'authorName': JSON.parse(this.$cookie.get('author')).authorName,
+              'integral': goodIntegral,
+              'address': JSON.parse(this.$cookie.get('author')).address
+            })
+          }).then(({data}) => {
+            if (data && data.code === 0) {
+              this.$message.success('兑换成功！')
+              this.$http({
+                url: this.$http.adornUrl(`/arct/author/info/${JSON.parse(this.$cookie.get('author')).id}`),
+                method: 'get',
+                params: this.$http.adornParams()
+              }).then(({data}) => {
+                if (data && data.code === 0) {
+                  this.$cookie.set('author', JSON.stringify(data.author))
+                }
+              })
+            } else {
+              this.$message.error('兑换失败！')
+            }
+          })
+        }
       },
       // 删除
       deleteHandle (id) {

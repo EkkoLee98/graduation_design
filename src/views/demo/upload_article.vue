@@ -462,9 +462,7 @@ export default {
   width: 700px;
   height: 300px;
 }
-
 .ql-editor {
-
   height: 300px;
 }
 </style>

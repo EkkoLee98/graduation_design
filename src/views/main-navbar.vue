@@ -76,6 +76,7 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>
+              <el-dropdown-item @click.native="goUpdateUser()">个人信息</el-dropdown-item>
               <el-dropdown-item @click.native="logoutHandle()">退出</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
@@ -206,6 +207,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.updatePassowrd.init()
       })
+    },
+    goUpdateUser () {
+      this.$router.push({path: `/update-user/?id=${JSON.parse(this.$cookie.get('author')).id}`})
     },
     // 退出
     logoutHandle() {

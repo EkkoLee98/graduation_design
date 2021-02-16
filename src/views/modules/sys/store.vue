@@ -322,15 +322,14 @@ export default {
     },
     collectGood () {
       this.$http({
-        url: this.$http.adornUrl('/commodity/commodity/collection'),
+        url: this.$http.adornUrl(`/commodity/commodity/collection/${this.goodObj.id}`),
         method: 'post',
-        data: this.$http.adornData({
-          id: this.goodObj.id
-        })
+        params: this.$http.adornParams()
       }).then(res => {
         console.log(res)
         if (res.data.code === 0) {
           this.goodObj.collect = true
+          this.goodObj.collectCount++
         }
       })
     },
@@ -343,6 +342,13 @@ export default {
       }).then(({data}) => {
         this.goodObj = data.commodity
         console.log(this.goodObj)
+        // this.ImgArr = this.goodObj.imgUrl
+      })
+      this.$http({
+        url: this.$http.adornUrl(`/commodity/commodity/comment/${id}`),
+        method: 'get'
+      }).then(({data}) => {
+        console.log(data)
         // this.ImgArr = this.goodObj.imgUrl
       })
     },

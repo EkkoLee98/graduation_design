@@ -177,6 +177,16 @@ export default {
         //   l.like = false
         // })
       })
+      this.$http({
+        url: this.$http.adornUrl('/commodity/commodity/guess/like'),
+        method: 'get',
+        params: this.$http.adornParams()
+      }).then(({data}) => {
+        console.log(data)
+        // this.list.forEach(l => {
+        //   l.like = false
+        // })
+      })
     }
   }
 }

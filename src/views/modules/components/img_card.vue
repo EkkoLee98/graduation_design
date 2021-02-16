@@ -47,11 +47,9 @@ export default {
     },
     likeIt (item) {
       this.$http({
-        url: this.$http.adornUrl('/commodity/commodity/like'),
+        url: this.$http.adornUrl(`/commodity/commodity/like/${item.id}`),
         method: 'post',
-        data: this.$http.adornData({
-          id: item.id
-        })
+        params: this.$http.adornParams()
       }).then(res => {
         console.log(res)
         if (res.data.code === 0) {

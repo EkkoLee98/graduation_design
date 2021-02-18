@@ -144,15 +144,28 @@
       // 获取数据列表
       getDataList () {
         this.dataListLoading = true
+        let params = {}
+        if (JSON.parse(this.$cookie.get('role')).roleId === 1) {
+          params = {
+            'page': this.pageIndex,
+            'limit': this.pageSize,
+            'classify': this.dataForm.classify,
+            'role': 1
+          }
+        } else {
+          params = {
+            'page': this.pageIndex,
+            'limit': this.pageSize,
+            'classify': this.dataForm.classify,
+            'authorId': JSON.parse(this.$cookie.get('author')).id
+          }
+        }
         this.$http({
           url: this.$http.adornUrl('/arct/article/list'),
           method: 'get',
-          params: this.$http.adornParams({
-            'page': this.pageIndex,
-            'limit': this.pageSize,
-            'classify': this.dataForm.classify
-          })
+          params: this.$http.adornParams(params)
         }).then(({data}) => {
+          console.log(JSON.parse(this.$cookie.get('role')))
           if (data && data.code === 0) {
             this.dataList = data.page.list
             this.totalPage = data.page.totalCount

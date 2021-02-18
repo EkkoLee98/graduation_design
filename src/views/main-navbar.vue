@@ -72,7 +72,8 @@
         <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">
-              <img src="~@/assets/img/timg.jpg" :alt="userName"><span style="color: #fff">{{ userName }}</span>
+              <img :src="avatar" :alt="userName"><span style="color: #fff">{{ userName }}</span>
+<!--              <img src="~@/assets/img/timg.jpg" :alt="userName"><span style="color: #fff">{{ userName }}</span>-->
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item @click.native="updatePasswordHandle()">修改密码</el-dropdown-item>
@@ -112,6 +113,9 @@ export default {
     this.routeHandle(this.$route)
   },
   computed: {
+    avatar () {
+      return JSON.parse(this.$cookie.get('author')).avatar
+    },
     navbarLayoutType: {
       get() {
         return this.$store.state.common.navbarLayoutType

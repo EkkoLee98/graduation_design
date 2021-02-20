@@ -306,16 +306,24 @@ export default {
       this.$http({
         url: this.$http.adornUrl('/commodity/commodity/comment'),
         method: 'post',
-        data: this.$http.adornData({
-          id: this.goodObj.id,
-          content: this.form.evaluation,
-          star: this.form.star
-        }, false)
+        data: this.$http.adornParams({
+          itemId: this.goodObj.id,
+          commentContent: this.form.evaluation,
+          commentStar: this.form.star
+        })
       }).then(res => {
         console.log(res)
         if (res.data.code === 0) {
           console.log('111')
           this.$message.success('发表成功！')
+          this.$http({
+            url: this.$http.adornUrl(`/commodity/commodity/comment/${this.$route.query.id}`),
+            method: 'get'
+          }).then(({data}) => {
+            console.log(data)
+            this.commentList = data.list
+            // this.ImgArr = this.goodObj.imgUrl
+          })
           this.dialogFormVisible = false
         }
       })

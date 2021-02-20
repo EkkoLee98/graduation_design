@@ -21,7 +21,7 @@
       <el-form-item v-if="isAdmin && !isAdd" label="浏览数量" prop="browseCount">
         <el-input v-model="dataForm.browseCount" placeholder=""></el-input>
       </el-form-item>
-      <el-form-item label="类别" prop="classify">
+      <el-form-item v-if="isAdmin" label="类别" prop="classify">
         <el-select v-model="dataForm.classify" placeholder="请选择类别">
           <el-option
             v-for="item in options"
@@ -273,6 +273,9 @@ export default {
       }
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          if (!this.isAdmin) {
+            this.dataForm.mode = '推友分享'
+          }
           this.$http({
             url: this.$http.adornUrl(`/arct/article/${!this.dataForm.id ? 'save' : 'update'}`),
             method: 'post',

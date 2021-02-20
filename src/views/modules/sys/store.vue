@@ -378,7 +378,7 @@ export default {
     console.log('销毁1')
   },
   deactivated () {
-    console.log('销毁2')
+    console.log('xwc傻逼')
     this.goodObj.commName = ''
     this.goodObj.imgUrl = []
     this.ImgArr = [

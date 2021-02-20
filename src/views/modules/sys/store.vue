@@ -166,8 +166,11 @@
               </div>
               <div style="text-align: left">
                 <div style="margin-bottom: 10px;font-size: 12px;color: #898989">{{item.userName}}</div>
-                <div style="margin-bottom: 10px">{{item.evaluation}}</div>
+                <div style="margin-bottom: 10px">{{item.commentContent}}</div>
                 <div style="margin-bottom: 10px;font-size: 12px;color: #898989">{{item.createTime}}</div>
+              </div>
+              <div style="position: absolute;bottom: 10px;right: 10px">
+                <el-rate v-model="item.commentStar" disabled></el-rate>
               </div>
             </div>
             <el-button style="margin-top: 10px; float: left" type="primary" @click="dialogFormVisible = true">发表评论</el-button>
@@ -197,11 +200,7 @@ export default {
   name: 'store',
   data () {
     return {
-      commentList: [{
-        'userName': 'test',
-        'evaluation': '超哥帅',
-        'createTime': '2077-01-01'
-      }],
+      commentList: [],
       dialogFormVisible: false,
       form: {
         evaluation: '',
@@ -316,6 +315,7 @@ export default {
         console.log(res)
         if (res.data.code === 0) {
           console.log('111')
+          this.$message.success('发表成功！')
           this.dialogFormVisible = false
         }
       })
@@ -349,6 +349,7 @@ export default {
         method: 'get'
       }).then(({data}) => {
         console.log(data)
+        this.commentList = data.list
         // this.ImgArr = this.goodObj.imgUrl
       })
     },
@@ -390,6 +391,7 @@ export default {
 <style lang="scss" scoped>
 .menu-wrap {
   .comment {
+    position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;

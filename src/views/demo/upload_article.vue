@@ -3,7 +3,7 @@
     <el-upload
       id="quill-upload"
       class="avatar-uploader"
-      action="http://localhost:8080/renren-fast/api/upload"
+      action="https://159.75.101.5/renren-fast/api/upload"
       :show-file-list="false"
       :headers="token"
       :on-success="uploadSuccess"
@@ -62,7 +62,7 @@
       <el-form-item label="封面图片" prop="cover">
         <el-upload
           class="upload-demo"
-          action="http://localhost:8080/renren-fast/api/upload"
+          action="https://159.75.101.5/renren-fast/api/upload"
           :on-preview="handlePreviewCover"
           :on-remove="handleRemoveCoer"
           :before-remove="beforeRemoveCover"
@@ -274,7 +274,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           if (!this.isAdmin) {
-            this.dataForm.mode = '推友分享'
+            this.dataForm.classify = '推友分享'
           }
           this.$http({
             url: this.$http.adornUrl(`/arct/article/${!this.dataForm.id ? 'save' : 'update'}`),

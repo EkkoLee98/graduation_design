@@ -10,7 +10,7 @@
       <el-form-item label="头像" prop="avatar">
         <el-upload
           class="avatar-uploader"
-          action="http://localhost:8080/renren-fast/api/upload"
+          action="https://159.75.101.5/renren-fast/api/upload"
           :show-file-list="false"
           :headers="token"
           :on-success="handleAvatarSuccess"

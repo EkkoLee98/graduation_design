@@ -6,7 +6,7 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('arct:comments:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
+        <el-button v-if="isAuth('arct:comments:save') && isAdmin" type="primary" @click="addOrUpdateHandle()">新增</el-button>
         <el-button v-if="isAuth('arct:comments:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
@@ -108,6 +108,11 @@
     components: {
       AddOrUpdate
     },
+    computed: {
+      isAdmin () {
+        return JSON.parse(this.$cookie.get('role')).roleId === 1
+      }
+    },
     activated () {
       this.getDataList()
     },
@@ -121,6 +126,7 @@
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
+            'authorId': JSON.parse(this.$cookie.get('author')).id,
             'key': this.dataForm.key
           })
         }).then(({data}) => {

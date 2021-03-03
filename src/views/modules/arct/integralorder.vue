@@ -6,7 +6,6 @@
       </el-form-item>
       <el-form-item>
         <el-button @click="getDataList()">查询</el-button>
-        <el-button v-if="isAuth('arct:integralorder:save')" type="primary" @click="addOrUpdateHandle()">新增</el-button>
         <el-button v-if="isAuth('arct:integralorder:delete')" type="danger" @click="deleteHandle()" :disabled="dataListSelections.length <= 0">批量删除</el-button>
       </el-form-item>
     </el-form>
@@ -105,6 +104,7 @@
           params: this.$http.adornParams({
             'page': this.pageIndex,
             'limit': this.pageSize,
+            'authorId': JSON.parse(this.$cookie.get('author')).id,
             'key': this.dataForm.key
           })
         }).then(({data}) => {

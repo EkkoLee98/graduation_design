@@ -28,6 +28,7 @@
             </el-form-item>
             <el-form-item>
               <el-button class="login-btn-submit" type="primary" @click="dataFormSubmit()">登录</el-button>
+              <el-button class="login-btn-submit" type="danger" @click="goRegister()">注册</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -38,6 +39,7 @@
 
 <script>
   import { getUUID } from '@/utils'
+  import register from "./register";
   export default {
     data () {
       return {
@@ -65,6 +67,9 @@
       this.getCaptcha()
     },
     methods: {
+      goRegister () {
+        this.$router.push({name: 'register'})
+      },
       // 提交表单
       dataFormSubmit () {
         this.$refs['dataForm'].validate((valid) => {
@@ -95,7 +100,7 @@
       // 获取验证码
       getCaptcha () {
         this.dataForm.uuid = getUUID()
-        this.captchaPath = this.$http.adornUrl(`/captcha.jpg?uuid=${this.dataForm.uuid}`)
+        this.captchaPath = `http://159.75.101.5:8080/renren-fast/captcha.jpg?uuid=${this.dataForm.uuid}`
       }
     }
   }
@@ -173,8 +178,10 @@
       }
     }
     .login-btn-submit {
-      width: 100%;
-      margin-top: 38px;
+      display: inline-block;
+      width: 100px;
+      margin-top: 18px;
+      margin-left: 10px;
     }
   }
 </style>

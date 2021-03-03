@@ -103,7 +103,7 @@ export default {
     // 获取验证码
     getCaptcha() {
       this.dataForm.uuid = getUUID()
-      this.captchaPath = this.$http.adornUrl(`/captcha.jpg?uuid=${this.dataForm.uuid}`)
+      this.captchaPath = `http://159.75.101.5:8080/renren-fast/captcha.jpg?uuid=${this.dataForm.uuid}`
     }
   }
 }
